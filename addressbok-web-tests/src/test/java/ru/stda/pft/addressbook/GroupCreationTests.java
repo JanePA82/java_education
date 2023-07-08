@@ -20,16 +20,16 @@ public class GroupCreationTests {
 
     wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
     js = (JavascriptExecutor) wd;
+
+    wd.get("http://localhost:8080/addressbook/group.php");
+    wd.findElement(By.name("user")).sendKeys("admin");
+    wd.findElement(By.name("pass")).sendKeys("secret");
+    wd.findElement(By.xpath("//input[@value='Login']")).click();
   }
 
   @Test
   public void testGroupCreation() throws Exception {
-    wd.get("http://localhost:8080/addressbook/group.php");
 
-    wd.findElement(By.name("user")).sendKeys("admin");
-
-    wd.findElement(By.name("pass")).sendKeys("secret");
-    wd.findElement(By.xpath("//input[@value='Login']")).click();
 //    driver.findElement(By.id("LoginForm")).click();
     wd.findElement(By.linkText("groups")).click();
     wd.findElement(By.name("new")).click();
