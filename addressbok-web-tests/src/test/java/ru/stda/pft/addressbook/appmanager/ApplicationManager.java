@@ -10,6 +10,9 @@ import java.time.Duration;
 
 public class ApplicationManager {
     public WebDriver wd;
+    private  SessionHelper sessionHelper;
+    private NavigationHelper navigationHelper;
+
     private GroupHelper groupHelper;
     public JavascriptExecutor js;
 
@@ -18,19 +21,10 @@ public class ApplicationManager {
         wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         js = (JavascriptExecutor) wd;
         groupHelper = new GroupHelper(wd);
-        login("admin", "secret");
+        navigationHelper = new NavigationHelper(wd);
+        sessionHelper = new SessionHelper(wd);
+        sessionHelper.login("admin", "secret");
 
-    }
-
-    public void login(String username, String password) {
-      wd.get("http://localhost:8080/addressbook/group.php");
-      wd.findElement(By.name("user")).sendKeys(username);
-      wd.findElement(By.name("pass")).sendKeys(password);
-      wd.findElement(By.xpath("//input[@value='Login']")).click();
-    }
-
-    public void gotoGroupPage() {
-      wd.findElement(By.linkText("groups")).click();
     }
 
     public void stop() {
@@ -40,5 +34,13 @@ public class ApplicationManager {
 
     public GroupHelper getGroupHelper() {
         return groupHelper;
+    }
+
+    public NavigationHelper getNavigationHelper() {
+        return navigationHelper;
+    }
+
+    public SessionHelper getSessionHelper() {
+        return sessionHelper;
     }
 }
