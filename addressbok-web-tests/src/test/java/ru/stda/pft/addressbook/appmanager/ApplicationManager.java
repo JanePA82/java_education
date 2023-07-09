@@ -20,6 +20,7 @@ public class ApplicationManager {
         wd = new ChromeDriver();
         wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         js = (JavascriptExecutor) wd;
+        wd.get("http://localhost:8080/addressbook/group.php");
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);
