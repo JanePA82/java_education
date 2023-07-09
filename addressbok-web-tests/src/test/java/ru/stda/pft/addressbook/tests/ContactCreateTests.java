@@ -1,4 +1,4 @@
-package ru.stda.pft.addressbook;
+package ru.stda.pft.addressbook.tests;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.stda.pft.addressbook.model.ContactData;
 
 import java.time.Duration;
 
