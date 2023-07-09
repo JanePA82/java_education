@@ -22,8 +22,9 @@ public class HelperBase {
         wd.findElement(locator).sendKeys(text);
     }
     protected void chois (By locator, String text) {
-
         click(locator);
         new Select(wd.findElement(locator)).selectByVisibleText(text);
         }
+
+
 }
