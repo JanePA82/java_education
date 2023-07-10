@@ -10,6 +10,7 @@ import java.time.Duration;
 
 public class ApplicationManager {
     public WebDriver wd;
+
     private ContactHelper contactHelper;
     private  SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
@@ -20,7 +21,7 @@ public class ApplicationManager {
         wd = new ChromeDriver();
         wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         js = (JavascriptExecutor) wd;
-        wd.get("http://localhost:8080/addressbook/group.php");
+        wd.get("http://localhost:8080/addressbook");
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);
@@ -51,5 +52,7 @@ public class ApplicationManager {
     public ContactHelper getContactHelper() {
         return contactHelper;
     }
+
+
 
 }
