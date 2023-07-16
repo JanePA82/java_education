@@ -3,7 +3,7 @@ package ru.stda.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import ru.stda.pft.addressbook.model.ContactData;
+import ru.stda.pft.addressbook.model.ContactDataEnter;
 import ru.stda.pft.addressbook.model.ContactDataModify;
 
 public class ContactHelper extends HelperBase {
@@ -13,7 +13,7 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void fillContactFormNew(ContactData contactData) {
+    public void fillContactFormNew(ContactDataEnter contactData) {
         type(By.name("firstname"), contactData.getFirstname());
         type(By.name("middlename"), contactData.getMiddlename());
         type(By.name("lastname"), contactData.getLastname());
@@ -61,7 +61,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void selectContact() {
-        click(By.id("23"));
+        click(By.name("selected[]"));
 
     }
 
@@ -77,7 +77,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void editContactModification() {
-     click(By.id("25"));
+     click(By.name("selected[]"));
         click(By.xpath("//img[@alt='Edit']"));
     }
 
