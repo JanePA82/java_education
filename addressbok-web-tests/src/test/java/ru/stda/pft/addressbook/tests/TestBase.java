@@ -1,6 +1,7 @@
 package ru.stda.pft.addressbook.tests;
 
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import ru.stda.pft.addressbook.appmanager.ApplicationManager;
 
@@ -14,10 +15,9 @@ public class TestBase {
     public void setUp() throws Exception {
         app.init();
     }
-/*
     @AfterMethod(alwaysRun = true)
     public void tearDown() throws Exception {
-        app.stop();  }*/
+        app.stop();  }
 
 
 
