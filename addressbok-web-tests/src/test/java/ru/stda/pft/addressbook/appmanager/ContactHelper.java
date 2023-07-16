@@ -3,8 +3,8 @@ package ru.stda.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import ru.stda.pft.addressbook.model.ContactDataEnter;
-import ru.stda.pft.addressbook.model.ContactDataModify;
+import org.testng.Assert;
+import ru.stda.pft.addressbook.model.ContactData;
 
 public class ContactHelper extends HelperBase {
 
@@ -13,7 +13,7 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void fillContactFormNew(ContactDataEnter contactData) {
+    public void fillContactForm(ContactData contactData) {
         type(By.name("firstname"), contactData.getFirstname());
         type(By.name("middlename"), contactData.getMiddlename());
         type(By.name("lastname"), contactData.getLastname());
@@ -35,7 +35,11 @@ public class ContactHelper extends HelperBase {
         chois(By.name("aday"), contactData.getAday());
         chois(By.name("amonth"), contactData.getAmonth());
         type(By.name("ayear"), contactData.getAyear());
-        chois(By.name("new_group"), contactData.getNew_group());
+        if (IsElementPresent(By.name("new_group"))) {
+            chois(By.name("new_group"), contactData.getNew_group());
+        } else {
+            Assert.assertFalse(IsElementPresent(By.name("new_group")));
+        }
         type(By.name("address2"), contactData.getAddress2());
         type(By.name("phone2"), contactData.getPhone2());
         type(By.name("notes"), contactData.getNotes());
@@ -56,12 +60,12 @@ public class ContactHelper extends HelperBase {
 
     public void submitContactCreation() {
         click(By.xpath("//div[@id='content']/form/input[1]"));
-
-
     }
 
     public void selectContact() {
-        click(By.name("selected[]"));
+        if (IsElementPresent(By.name("selected[]"))) {
+            click(By.name("selected[]"));
+        }
 
     }
 
@@ -71,13 +75,15 @@ public class ContactHelper extends HelperBase {
 //        assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
 
     }
+
     public void gotoHomePage() {
         click(By.linkText("home"));
 
     }
 
     public void editContactModification() {
-     click(By.name("selected[]"));
+
+        click(By.name("selected[]"));
         click(By.xpath("//img[@alt='Edit']"));
     }
 
@@ -85,7 +91,7 @@ public class ContactHelper extends HelperBase {
         click(By.name("update"));
     }
 
-    public void fillContactFormModify(ContactDataModify contactDataModify) {
+   /* public void fillContactFormModify(ContactData contactDataModify) {
         type(By.name("firstname"), contactDataModify.getFirstname());
         type(By.name("middlename"), contactDataModify.getMiddlename());
         type(By.name("lastname"), contactDataModify.getLastname());
@@ -112,5 +118,5 @@ public class ContactHelper extends HelperBase {
         type(By.name("notes"), contactDataModify.getNotes());
 
 
-}
+    }*/
 }

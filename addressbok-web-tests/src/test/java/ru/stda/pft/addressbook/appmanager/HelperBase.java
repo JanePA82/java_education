@@ -1,10 +1,7 @@
 package ru.stda.pft.addressbook.appmanager;
 
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 
 public class HelperBase {
@@ -21,18 +18,44 @@ public class HelperBase {
 
     protected void type(By locator, String text) {
         click(locator);
-        wd.findElement(locator).clear();
-        wd.findElement(locator).sendKeys(text);
-    }
+        if (text != null) {
+            String existingText = wd.findElement(locator).getAttribute("value");
+            if (!text.equals(existingText)) {
+                wd.findElement(locator).clear();
+                wd.findElement(locator).sendKeys(text);
+            }
+        }
 /*    protected void list_check (By locator) {
         new Select(wd.findElement(locator)).getFirstSelectedOption();
     }*/
+    }
 
-    protected void chois (By locator, String text) {
+    protected void chois(By locator, String text) {
         click(locator);
+        if (IsElementOfListPresent(locator,text) ){
         new Select(wd.findElement(locator)).selectByVisibleText(text);
+    }}
+
+    public boolean IsElementPresent(By locator) {
+        try {
+            wd.findElement(locator);
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
 
     }
+
+    protected boolean IsElementOfListPresent(By locator, String text) {
+        try {
+            new Select(wd.findElement(locator)).selectByVisibleText(text);
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+
+    }
+
     private boolean isAlertPresent() {
         try {
             wd.switchTo().alert();

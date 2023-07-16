@@ -1,15 +1,16 @@
 package ru.stda.pft.addressbook.tests;
 
 import org.testng.annotations.Test;
-import ru.stda.pft.addressbook.model.ContactDataEnter;
+import ru.stda.pft.addressbook.model.ContactData;
 
 public class ContactCreateTests extends  TestBase{
 
 
   @Test
   public void testContactCreate() throws Exception {
+
     app.getContactHelper().gotoContactAdditionPage();
-    app.getContactHelper().fillContactFormNew(new ContactDataEnter(
+    app.getContactHelper().fillContactForm(new ContactData(
             "Контакт", "Контактович", "Законтачен", "cont",
             "Умник","Bee", "NY","11111", "22222", "33333", "44444",
             "email", "email2", "email3", "adf.ru","1","August","2000",

@@ -34,7 +34,8 @@ public class GroupHelper extends HelperBase {
     }
 
     public void selectGroup() {
-        click(By.name("selected[]"));
+        if (IsElementPresent(By.name("selected[]")) ){
+        click(By.name("selected[]"));}
     }
 
 
