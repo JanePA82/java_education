@@ -2,6 +2,10 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/SANDBOX/build.gradle" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/addressbok-web-tests/build.gradle" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/addressbok-web-tests/build.gradle" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/addressbok-web-tests/src/test/java/ru/stda/pft/addressbook/tests/ContactDeleteTests.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mantis-tests/build.gradle" charset="UTF-8" />
     <file url="PROJECT" charset="windows-1251" />
   </component>
 </project>
