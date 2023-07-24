@@ -18,7 +18,7 @@ public class ContactDeleteTests extends TestBase {
             app.getContactHelper().selectContact();
             app.getContactHelper().submitContactDelete();
             List<ContactData> after = app.getContactHelper().getContactList();
-            Assert.assertEquals(after.size(), before.size() - 1);
+            Assert.assertEquals(after.size(), (before.size() - 1));
         } else {
             app.getContactHelper().gotoContactAdditionPage();
             app.getContactHelper().fillContactForm(new ContactData( "Контакт", "Контактович", "Законтачен", "cont",

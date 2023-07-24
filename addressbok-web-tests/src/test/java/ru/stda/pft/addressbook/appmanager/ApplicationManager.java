@@ -9,6 +9,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.Browser;
 
+import java.time.Duration;
+
 public class ApplicationManager {
     public WebDriver wd;
     private ContactHelper contactHelper;
@@ -31,7 +33,7 @@ public class ApplicationManager {
         } else if (Browser.IE.browserName().equals(browser)) {
             wd = new InternetExplorerDriver();
         }
-//        wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(0);
+        wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         js = (JavascriptExecutor) wd;
         wd.get("http://localhost:8080/addressbook");
         groupHelper = new GroupHelper(wd);
