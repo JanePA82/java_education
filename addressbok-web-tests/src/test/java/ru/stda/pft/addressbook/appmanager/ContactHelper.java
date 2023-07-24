@@ -3,8 +3,12 @@ package ru.stda.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import ru.stda.pft.addressbook.model.ContactData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
@@ -89,6 +93,27 @@ public class ContactHelper extends HelperBase {
 
     public void submitContactModification() {
         click(By.name("update"));
+    }
+
+    public List<ContactData> getContactList() {
+        List<ContactData> contacts = new ArrayList<ContactData>();
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+//        System.out.println (elements);
+        for (WebElement element : elements) {
+            String title = element.findElement(By.tagName("input")).getAttribute("title");
+          int fr = title.indexOf("(");int to = title.indexOf(")");
+            String fl = title.substring(fr+1, to);
+            int md = fl.indexOf(" ");
+            String firstname = fl.substring(0, md);
+            String lastname = fl.substring(md+1);
+
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            ContactData contact = new ContactData(id, firstname, null,lastname,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+            contacts.add(contact);
+
+        }
+
+        return contacts;
     }
 
    /* public void fillContactFormModify(ContactData contactDataModify) {
