@@ -9,8 +9,6 @@ import java.util.Comparator;
 import java.util.List;
 
 public class DeleteGroupTests extends TestBase {
-
-
     @Test
     public void testDeleteGroupTests() throws Exception {
         app.getNavigationHelper().gotoGroupPage();
@@ -40,7 +38,5 @@ public class DeleteGroupTests extends TestBase {
             int after = app.getGroupHelper().getGroupCount();
             Assert.assertEquals(after, 0);
         }
-
     }
-
 }
