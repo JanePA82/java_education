@@ -100,19 +100,50 @@ public class ContactHelper extends HelperBase {
         List<WebElement> elements = wd.findElements(By.name("entry"));
 //        System.out.println (elements);
         for (WebElement element : elements) {
-            String title = element.findElement(By.tagName("input")).getAttribute("title");
+            List<WebElement> els = element.findElements(By.tagName("td"));
+            int i = 0;
+            String firstname = null ;
+            String lastname = null;
+            String address =null ;
+            int id =0;
+            for (WebElement el : els) {
+                i = i + 1;
+                if (i == 1) {
+                    id = Integer.parseInt(el.findElement(By.tagName("input")).getAttribute("value"));
+                } else if (i == 2) {
+                    lastname = el.getText();
+                } else if (i == 3) {
+                    firstname = el.getText();
+                } else if (i == 4) {
+                    address = el.getText();
+                }
+                else  {break;}
+            }
+/*                String title = element.findElement(By.tagName("input")).getAttribute("title");
           int fr = title.indexOf("(");int to = title.indexOf(")");
             String fl = title.substring(fr+1, to);
             int md = fl.indexOf(" ");
             String firstname = fl.substring(0, md);
-            String lastname = fl.substring(md+1);
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            ContactData contact = new ContactData(id, firstname, null,lastname,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+            String lastname = fl.substring(md+1);*/
+            ContactData contact = new ContactData(id, firstname, null, lastname, null, null, null, address, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
             contacts.add(contact);
 
         }
 
         return contacts;
+    }
+
+    public int getNextID() {
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+        int nextId = 0;
+        for (WebElement element : elements) {
+            int id = 0;
+            id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"))+1;
+            if (id > nextId) {
+                nextId = id;
+            }
+        }
+        return nextId;
     }
 
    /* public void fillContactFormModify(ContactData contactDataModify) {
