@@ -107,32 +107,19 @@ public class ContactHelper extends HelperBase {
             String address =null ;
             int id =0;
             for (WebElement el : els) {
-                i = i + 1;
-                if (i == 1) {
-                    id = Integer.parseInt(el.findElement(By.tagName("input")).getAttribute("value"));
-                } else if (i == 2) {
-                    lastname = el.getText();
-                } else if (i == 3) {
-                    firstname = el.getText();
-                } else if (i == 4) {
-                    address = el.getText();
-                }
+                if (i<4) {
+                id = Integer.parseInt(els.get(0).findElement(By.tagName("input")).getAttribute("value"));
+                lastname = els.get(1).getText();
+                firstname = els.get(2).getText();
+                address = els.get(3).getText();}
                 else  {break;}
+                i = i + 1;
             }
-/*                String title = element.findElement(By.tagName("input")).getAttribute("title");
-          int fr = title.indexOf("(");int to = title.indexOf(")");
-            String fl = title.substring(fr+1, to);
-            int md = fl.indexOf(" ");
-            String firstname = fl.substring(0, md);
-            String lastname = fl.substring(md+1);*/
-            ContactData contact = new ContactData(id, firstname, null, lastname, null, null, null, address, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-            contacts.add(contact);
-
+                ContactData contact = new ContactData(id, firstname, null, lastname, null, null, null, address, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+                contacts.add(contact);
         }
-
         return contacts;
     }
-
     public int getNextID() {
         List<WebElement> elements = wd.findElements(By.name("entry"));
         int nextId = 0;
