@@ -5,8 +5,10 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stda.pft.addressbook.model.GroupData;
+import ru.stda.pft.addressbook.model.Groups;
 
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupModificationTests extends TestBase {
     @BeforeMethod
@@ -20,7 +22,7 @@ public class GroupModificationTests extends TestBase {
     @Test
     public void testGroupModification() {
 
-        Set<GroupData> before = app.group().all();
+        Groups before = app.group().all();
         GroupData modificationGroup = before.iterator().next();
 //        int index = before.size() - 1;
         GroupData group = new GroupData()
@@ -29,11 +31,11 @@ public class GroupModificationTests extends TestBase {
                 .withFooter("retest1")
                 .withHeader("retest2");
         app.group().modify(group);
-        Set<GroupData> after = app.group().all();
+        Groups after = app.group().all();
         Assert.assertEquals(after.size(), before.size());
-        before.remove(modificationGroup);
+/*        before.remove(modificationGroup);
         before.add(group);
-
-        Assert.assertEquals(before, after);
+        Assert.assertEquals(before, after);*/
+        assertThat(after, equalTo(before.without(modificationGroup).withAdded(group)));
     }
 }
