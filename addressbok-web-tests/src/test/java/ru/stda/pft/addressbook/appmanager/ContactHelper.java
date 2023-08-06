@@ -8,7 +8,9 @@ import org.testng.Assert;
 import ru.stda.pft.addressbook.model.ContactData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -70,8 +72,13 @@ public class ContactHelper extends HelperBase {
         if (isElementPresent(By.name("selected[]"))) {
             click(By.name("selected[]"));
         }
-
     }
+    public void selectContactById(int id) {
+        if (isElementPresent(By.name("selected[]"))) {
+                wd.findElement(By.cssSelector("input[value='"+id+"']")).click();
+        }
+    }
+
 
     public void submitContactDelete() {
         click(By.xpath("//input[@value='Delete']"));
@@ -89,26 +96,7 @@ public class ContactHelper extends HelperBase {
         click(By.name("update"));
     }
 
-    public List<ContactData> list() {
-        List<ContactData> contacts = new ArrayList<ContactData>();
-        List<WebElement> elements = wd.findElements(By.name("entry"));
-//        System.out.println (elements);
-        for (WebElement element : elements) {
-            List<WebElement> els = element.findElements(By.tagName("td"));
-            int id = Integer.parseInt(els.get(0).findElement(By.tagName("input")).getAttribute("value"));
-            String firstname = els.get(2).getText();
-            ;
-            String lastname = els.get(1).getText();
-            String address = els.get(3).getText();
-            ContactData contact = new ContactData()
-                    .withId(id)
-                    .withLastname(lastname)
-                    .withFirstname(firstname)
-                    .withAddress(address);
-            contacts.add(contact);
-        }
-        return contacts;
-    }
+
 
     public int nextId() {
         List<WebElement> elements = wd.findElements(By.name("entry"));
@@ -137,6 +125,52 @@ public class ContactHelper extends HelperBase {
         selectContact();
         submitContactDelete();
         NavigationHelper.homePage();
+    }
+
+    public void delete(ContactData contact) {
+        selectContactById(contact.getId());
+        submitContactDelete();
+        NavigationHelper.homePage();
+    }
+
+
+    public Set<ContactData> all() {
+        Set<ContactData> contacts = new HashSet<>();
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+//        System.out.println (elements);
+        for (WebElement element : elements) {
+            List<WebElement> els = element.findElements(By.tagName("td"));
+            int id = Integer.parseInt(els.get(0).findElement(By.tagName("input")).getAttribute("value"));
+            String firstname = els.get(2).getText();
+            String lastname = els.get(1).getText();
+            String address = els.get(3).getText();
+            ContactData contact = new ContactData()
+                    .withId(id)
+                    .withLastname(lastname)
+                    .withFirstname(firstname)
+                    .withAddress(address);
+            contacts.add(contact);
+        }
+        return contacts;
+    }
+    public List<ContactData> list() {
+        List<ContactData> contacts = new ArrayList<ContactData>();
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+//        System.out.println (elements);
+        for (WebElement element : elements) {
+            List<WebElement> els = element.findElements(By.tagName("td"));
+            int id = Integer.parseInt(els.get(0).findElement(By.tagName("input")).getAttribute("value"));
+            String firstname = els.get(2).getText();
+            String lastname = els.get(1).getText();
+            String address = els.get(3).getText();
+            ContactData contact = new ContactData()
+                    .withId(id)
+                    .withLastname(lastname)
+                    .withFirstname(firstname)
+                    .withAddress(address);
+            contacts.add(contact);
+        }
+        return contacts;
     }
 
    /* public void fillContactFormModify(ContactData contactDataModify) {

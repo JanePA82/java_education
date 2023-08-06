@@ -5,14 +5,14 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stda.pft.addressbook.model.ContactData;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class ContactCreateTests extends  TestBase{
   @Test
   public void testContactCreate() throws Exception {
     app.goTo().homePage();
-    List<ContactData> before = app.contact().list();
+    Set<ContactData> before = app.contact().all();
+
     int id = app.contact().nextId();
     app.contact().clickAdd();
     String firstN = RandomStringUtils.randomAlphabetic(5);
@@ -31,7 +31,7 @@ public class ContactCreateTests extends  TestBase{
             .withEmail2("adf@df")
             .withEmail3("adaf@fds");
         app.contact().create(contact);
-    List<ContactData> after = app.contact().list();
+    Set<ContactData> after = app.contact().all();
     Assert.assertEquals(after.size(), before.size()+1 );
     before.add(contact);
 
@@ -40,9 +40,10 @@ public class ContactCreateTests extends  TestBase{
     Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));*/
 
 // сравнение элементов в упорядоченном сортировкой множестве по ID
-    Comparator<? super ContactData> byId= Comparator.comparingInt(ContactData::getId);
+/*    Comparator<? super ContactData> byId= Comparator.comparingInt(ContactData::getId);
     before.sort(byId);
-    after.sort(byId);
+    after.sort(byId);*/
+//    System.out.println(before);System.out.println(after);
     Assert.assertEquals(before, after);
   }
 }

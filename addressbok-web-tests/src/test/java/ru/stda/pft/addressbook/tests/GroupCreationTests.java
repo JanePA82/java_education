@@ -13,9 +13,9 @@ public class GroupCreationTests extends TestBase {
     public void testGroupCreation() throws Exception {
         app.goTo().groupPage();
         Set<GroupData> before = app.group().all();
-        int id = app.group().getIndexGroup();
+   //     int id = app.group().getIndexGroup();
         String nameGR = RandomStringUtils.randomAlphabetic(5);
-        GroupData group = new GroupData().withName(nameGR).withId(id);
+        GroupData group = new GroupData().withName(nameGR);//.withId(id);
         app.group().create(group);
         Set<GroupData> after = app.group().all();
         Assert.assertEquals(after.size(), before.size() + 1);
