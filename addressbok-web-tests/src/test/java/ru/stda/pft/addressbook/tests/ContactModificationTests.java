@@ -11,9 +11,9 @@ import java.util.List;
 public class ContactModificationTests extends TestBase {
     @BeforeMethod
     public void ensurePreconditions() {
-        app.getNavigationHelper().gotoHomePage();
-        if (!app.getContactHelper().isThereAContact()) {
-            app.getContactHelper().createContact(new ContactData(
+        app.goTo().homePage();
+        if (!app.contact().isThereAContact()) {
+            app.contact().create(new ContactData(
                     "Контакт", "Контактович", "Законтачен", "cont",
                     "Умник", "Bee", "NY", "11111", "22222", "33333", "44444",
                     "email", "email2", "email3", "adf.ru", "1", "August", "2000",
@@ -24,19 +24,19 @@ public class ContactModificationTests extends TestBase {
 
     @Test
     public void testContactModification() {
-        List<ContactData> before = app.getContactHelper().getContactList();
+        List<ContactData> before = app.contact().list();
         int index = before.size()-1;
-        app.getContactHelper().editContactModification(String.valueOf(before.get(index).getId()));
+        app.contact().edit(String.valueOf(before.get(index).getId()));
 
         ContactData contact = new ContactData(before.get(index).getId(), "ReКонтакт", "ReКонтактович", "ReЗаконтачен", "cont",
                 "Умник", "Bee", "ReNY", "11111", "22222", "33333", "44444",
                 "Reemail", "Reemail2", "Reemail3", "Readf.ru", "1", "June", "1980",
                 "1", "July", "1980", null, "sdgsdg", "5555555", "hdf", null /*"https://w.forfun.com/fetch/35/3568329d72ef7092e7b421ab42961710.jpeg")*/
         );
-        app.getContactHelper().fillContactForm(contact);
-        app.getContactHelper().submitContactModification();
-        app.getNavigationHelper().gotoHomePage();
-        List<ContactData> after = app.getContactHelper().getContactList();
+        app.contact().filling(contact);
+        app.contact().submitChange();
+        app.goTo().homePage();
+        List<ContactData> after = app.contact().list();
         Assert.assertEquals(after.size(), before.size());
         before.remove(index);
         before.add(contact);

@@ -11,10 +11,10 @@ import java.util.List;
 public class ContactCreateTests extends  TestBase{
   @Test
   public void testContactCreate() throws Exception {
-    app.getNavigationHelper().gotoHomePage();
-    List<ContactData> before = app.getContactHelper().getContactList();
-    int id = app.getContactHelper().getNextID();
-    app.getContactHelper().gotoContactAdditionPage();
+    app.goTo().homePage();
+    List<ContactData> before = app.contact().list();
+    int id = app.contact().id();
+    app.contact().clickAdd();
     String firstN = RandomStringUtils.randomAlphabetic(5);
     String middlN = RandomStringUtils.randomAlphabetic(5);
     String lastN = RandomStringUtils.randomAlphabetic(5);
@@ -23,8 +23,8 @@ public class ContactCreateTests extends  TestBase{
             "Умник","Bee", "NY","11111", "22222", "33333", "44444",
             "email", "email2", "email3", "adf.ru","1","August","2000",
             "1","July","1980", "111", "sdgsdg", "5555555","hdf", null);
-    app.getContactHelper().createContact(contact);
-    List<ContactData> after = app.getContactHelper().getContactList();
+        app.contact().create(contact);
+    List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size()+1 );
     before.add(contact);
 

@@ -1,6 +1,7 @@
 package ru.stda.pft.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stda.pft.addressbook.model.GroupData;
 
@@ -8,25 +9,28 @@ import java.util.Comparator;
 import java.util.List;
 
 public class DeleteGroupTests extends TestBase {
-    @Test
-    public void testDeleteGroupTests() throws Exception {
-        app.getNavigationHelper().gotoGroupPage();
-
-        if (!app.getGroupHelper().isThereAGroup()) {
-            app.getGroupHelper().createGroup(new GroupData("111", null, null));
+    @BeforeMethod
+    public void ensurePreconditions() {
+        app.goTo().groupPage();
+        if (app.group().list().size()==0) {
+            app.group().create(new GroupData().withName("111"));
         }
-        List<GroupData> before = app.getGroupHelper().getGroupList();
-        app.getGroupHelper().selectGroup(before.size() - 1);
-        app.getGroupHelper().deleteSelectionGroup();
-        app.getGroupHelper().retuneToGroupPage();
-        List<GroupData> after = app.getGroupHelper().getGroupList();
+    }
+    @Test
+    public void testDeleteGroupTests() {
+        List<GroupData> before = app.group().list();
+        int index = before.size() - 1;
+        app.group().delete(index);
+        List<GroupData> after = app.group().list();
         Assert.assertEquals(after.size(), before.size() - 1);
 
-        before.remove(before.size() - 1);
+        before.remove(index);
         Comparator<? super GroupData> byId = Comparator.comparingInt(GroupData::getId);
         before.sort(byId);
         after.sort(byId);
         Assert.assertEquals(before, after);
 
     }
+
+
 }

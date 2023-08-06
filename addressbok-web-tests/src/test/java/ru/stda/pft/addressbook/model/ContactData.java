@@ -4,9 +4,9 @@ import java.util.Objects;
 
 public class ContactData {
     private int id;
-    private final String firstname;
+    private  String firstname;
     private String middlename;
-    private final String lastname;
+    private  String lastname;
     private String nickname;
     private String photo;
     private String title;

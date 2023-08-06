@@ -17,7 +17,7 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void fillContactForm(ContactData contactData) {
+    public void filling(ContactData contactData) {
         type(By.name("firstname"), contactData.getFirstname());
         type(By.name("middlename"), contactData.getMiddlename());
         type(By.name("lastname"), contactData.getLastname());
@@ -58,7 +58,7 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    public void gotoContactAdditionPage() {
+    public void clickAdd() {
         click(By.linkText("add new"));
     }
 
@@ -80,16 +80,16 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    public void editContactModification(String index) {
+    public void edit(String index) {
        click(By.cssSelector(String.format("a[href='edit.php?id=%s']",index)));
     }
 
 
-    public void submitContactModification() {
+    public void submitChange() {
         click(By.name("update"));
     }
 
-    public List<ContactData> getContactList() {
+    public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> elements = wd.findElements(By.name("entry"));
 //        System.out.println (elements);
@@ -105,12 +105,11 @@ public class ContactHelper extends HelperBase {
         return contacts;
     }
 
-    public int getNextID() {
+    public int id() {
         List<WebElement> elements = wd.findElements(By.name("entry"));
         int nextId = 0;
         for (WebElement element : elements) {
-            int id = 0;
-            id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value")) + 1;
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"))+1 ;
             if (id > nextId) {
                 nextId = id;
             }
@@ -122,11 +121,17 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.name("selected[]")) ;
     }
 
-    public void createContact(ContactData contact) {
-       gotoContactAdditionPage();
-        fillContactForm(contact);
+    public void create(ContactData contact) {
+       clickAdd();
+        filling(contact);
         submitContactCreation();
-        NavigationHelper.gotoHomePage();
+        NavigationHelper.homePage();
+    }
+
+    public void delete() {
+        selectContact();
+        submitContactDelete();
+        NavigationHelper.homePage();
     }
 
    /* public void fillContactFormModify(ContactData contactDataModify) {
