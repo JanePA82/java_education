@@ -81,7 +81,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void edit(String index) {
-       click(By.cssSelector(String.format("a[href='edit.php?id=%s']",index)));
+        click(By.cssSelector(String.format("a[href='edit.php?id=%s']", index)));
     }
 
 
@@ -96,20 +96,25 @@ public class ContactHelper extends HelperBase {
         for (WebElement element : elements) {
             List<WebElement> els = element.findElements(By.tagName("td"));
             int id = Integer.parseInt(els.get(0).findElement(By.tagName("input")).getAttribute("value"));
-            String firstname = els.get(2).getText();;
+            String firstname = els.get(2).getText();
+            ;
             String lastname = els.get(1).getText();
             String address = els.get(3).getText();
-            ContactData contact = new ContactData(id, firstname, null, lastname, null, null, null, address, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+            ContactData contact = new ContactData()
+                    .withId(id)
+                    .withLastname(lastname)
+                    .withFirstname(firstname)
+                    .withAddress(address);
             contacts.add(contact);
         }
         return contacts;
     }
 
-    public int id() {
+    public int nextId() {
         List<WebElement> elements = wd.findElements(By.name("entry"));
         int nextId = 0;
         for (WebElement element : elements) {
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"))+1 ;
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value")) + 1;
             if (id > nextId) {
                 nextId = id;
             }
@@ -118,11 +123,11 @@ public class ContactHelper extends HelperBase {
     }
 
     public boolean isThereAContact() {
-        return isElementPresent(By.name("selected[]")) ;
+        return isElementPresent(By.name("selected[]"));
     }
 
     public void create(ContactData contact) {
-       clickAdd();
+        clickAdd();
         filling(contact);
         submitContactCreation();
         NavigationHelper.homePage();

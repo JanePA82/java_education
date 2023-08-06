@@ -13,16 +13,23 @@ public class ContactCreateTests extends  TestBase{
   public void testContactCreate() throws Exception {
     app.goTo().homePage();
     List<ContactData> before = app.contact().list();
-    int id = app.contact().id();
+    int id = app.contact().nextId();
     app.contact().clickAdd();
     String firstN = RandomStringUtils.randomAlphabetic(5);
-    String middlN = RandomStringUtils.randomAlphabetic(5);
+//    String middlN = RandomStringUtils.randomAlphabetic(5);
     String lastN = RandomStringUtils.randomAlphabetic(5);
-    String nickN = RandomStringUtils.randomAlphabetic(3);
-    ContactData contact = new ContactData(id, firstN, middlN, lastN, nickN,
-            "Умник","Bee", "NY","11111", "22222", "33333", "44444",
-            "email", "email2", "email3", "adf.ru","1","August","2000",
-            "1","July","1980", "111", "sdgsdg", "5555555","hdf", null);
+//    String nickN = RandomStringUtils.randomAlphabetic(3);
+    ContactData contact = new ContactData()
+            .withId(id)
+            .withLastname(lastN)
+            .withFirstname(firstN)
+            .withAddress("Старые Петушки")
+            .withMobilePhone("+77777")
+            .withWorkPhone("(555)555")
+            .withHomePhone("78 78 78")
+            .withEmail("ddfa@ddf")
+            .withEmail2("adf@df")
+            .withEmail3("adaf@fds");
         app.contact().create(contact);
     List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size()+1 );

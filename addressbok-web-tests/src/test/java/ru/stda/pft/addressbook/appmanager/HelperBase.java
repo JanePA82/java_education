@@ -31,9 +31,10 @@ public class HelperBase {
     }
 
     protected void chois(By locator, String text) {
+        if (text!=null){
         click(locator);
         if (IsElementOfListPresent(locator,text) ){
-        new Select(wd.findElement(locator)).selectByVisibleText(text);
+        new Select(wd.findElement(locator)).selectByVisibleText(text);}
     }}
 
     public static boolean isElementPresent(By locator) {
