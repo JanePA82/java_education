@@ -11,7 +11,7 @@ import java.util.List;
 public class ContactCreateTests extends  TestBase{
   @Test
   public void testContactCreate() throws Exception {
-    app.getContactHelper().gotoHomePage();
+    app.getNavigationHelper().gotoHomePage();
     List<ContactData> before = app.getContactHelper().getContactList();
     int id = app.getContactHelper().getNextID();
     app.getContactHelper().gotoContactAdditionPage();
@@ -23,9 +23,7 @@ public class ContactCreateTests extends  TestBase{
             "Умник","Bee", "NY","11111", "22222", "33333", "44444",
             "email", "email2", "email3", "adf.ru","1","August","2000",
             "1","July","1980", "111", "sdgsdg", "5555555","hdf", null);
-    app.getContactHelper().fillContactForm(contact);
-    app.getContactHelper().submitContactCreation();
-    app.getContactHelper().gotoHomePage();
+    app.getContactHelper().createContact(contact);
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size()+1 );
     before.add(contact);

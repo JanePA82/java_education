@@ -6,13 +6,13 @@ import org.openqa.selenium.support.ui.Select;
 
 public class HelperBase {
     public boolean acceptNextAlert = true;
-    protected WebDriver wd;
+    protected static WebDriver wd;
 
     public HelperBase(WebDriver wd) {
         this.wd = wd;
     }
 
-    protected void click(By locator) {
+    protected static void click(By locator) {
         wd.findElement(locator).click();
     }
 
@@ -36,7 +36,7 @@ public class HelperBase {
         new Select(wd.findElement(locator)).selectByVisibleText(text);
     }}
 
-    public boolean IsElementPresent(By locator) {
+    public static boolean isElementPresent(By locator) {
         try {
             wd.findElement(locator);
             return true;

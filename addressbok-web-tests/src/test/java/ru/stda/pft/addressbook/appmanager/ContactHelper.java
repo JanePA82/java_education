@@ -39,10 +39,10 @@ public class ContactHelper extends HelperBase {
         chois(By.name("aday"), contactData.getAday());
         chois(By.name("amonth"), contactData.getAmonth());
         type(By.name("ayear"), contactData.getAyear());
-        if (IsElementPresent(By.name("new_group"))) {
+        if (isElementPresent(By.name("new_group"))) {
             chois(By.name("new_group"), contactData.getNew_group());
         } else {
-            Assert.assertFalse(IsElementPresent(By.name("new_group")));
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
         type(By.name("address2"), contactData.getAddress2());
         type(By.name("phone2"), contactData.getPhone2());
@@ -67,7 +67,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void selectContact() {
-        if (IsElementPresent(By.name("selected[]"))) {
+        if (isElementPresent(By.name("selected[]"))) {
             click(By.name("selected[]"));
         }
 
@@ -80,10 +80,6 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    public void gotoHomePage() {
-        click(By.linkText("home"));
-
-    }
 
     public void editContactModification() {
 
@@ -101,36 +97,38 @@ public class ContactHelper extends HelperBase {
 //        System.out.println (elements);
         for (WebElement element : elements) {
             List<WebElement> els = element.findElements(By.tagName("td"));
-            int i = 0;
-            String firstname = null ;
-            String lastname = null;
-            String address =null ;
-            int id =0;
-            for (WebElement el : els) {
-                if (i<4) {
-                id = Integer.parseInt(els.get(0).findElement(By.tagName("input")).getAttribute("value"));
-                lastname = els.get(1).getText();
-                firstname = els.get(2).getText();
-                address = els.get(3).getText();}
-                else  {break;}
-                i = i + 1;
-            }
-                ContactData contact = new ContactData(id, firstname, null, lastname, null, null, null, address, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-                contacts.add(contact);
+            int id = Integer.parseInt(els.get(0).findElement(By.tagName("input")).getAttribute("value"));
+            String firstname = els.get(2).getText();;
+            String lastname = els.get(1).getText();
+            String address = els.get(3).getText();
+            ContactData contact = new ContactData(id, firstname, null, lastname, null, null, null, address, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+            contacts.add(contact);
         }
         return contacts;
     }
+
     public int getNextID() {
         List<WebElement> elements = wd.findElements(By.name("entry"));
         int nextId = 0;
         for (WebElement element : elements) {
             int id = 0;
-            id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"))+1;
+            id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value")) + 1;
             if (id > nextId) {
                 nextId = id;
             }
         }
         return nextId;
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]")) ;
+    }
+
+    public void createContact(ContactData contact) {
+       gotoContactAdditionPage();
+        fillContactForm(contact);
+        submitContactCreation();
+        NavigationHelper.gotoHomePage();
     }
 
    /* public void fillContactFormModify(ContactData contactDataModify) {
