@@ -1,7 +1,7 @@
 package ru.stda.pft.addressbook.tests;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.testng.Assert;
+import org.hamcrest.CoreMatchers;
 import org.testng.annotations.Test;
 import ru.stda.pft.addressbook.model.Contacs;
 import ru.stda.pft.addressbook.model.ContactData;
@@ -33,9 +33,10 @@ public class ContactCreateTests extends  TestBase{
             .withEmail2("adf@df")
             .withEmail3("adaf@fds");
         app.contact().create(contact);
+    assertThat(app.contact().count(), CoreMatchers.equalTo(before.size()+1));
     Contacs after = (Contacs) app.contact().all();
-    Assert.assertEquals(after.size(), before.size()+1 );
-    before.add(contact);
+
+//    before.add(contact);
 
 // сравнение элементов в множестве по ID
 /*    contact.setId(after.stream().max(Comparator.comparingInt(ContactData::getId)).get().getId());

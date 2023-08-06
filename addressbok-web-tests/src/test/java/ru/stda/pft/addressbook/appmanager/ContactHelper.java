@@ -15,6 +15,10 @@ import java.util.Set;
 public class ContactHelper extends HelperBase {
 
 
+    public int count() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
+
     public ContactHelper(WebDriver wd) {
         super(wd);
     }

@@ -1,6 +1,5 @@
 package ru.stda.pft.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stda.pft.addressbook.model.Contacs;
@@ -55,9 +54,9 @@ public class ContactModificationTests extends TestBase {
         app.contact().filling(contact);
         app.contact().submitChange();
         app.goTo().homePage();
+        assertThat(app.contact().count(), equalTo(before.size()));
         Contacs after = (Contacs) app.contact().all();
-        Assert.assertEquals(after.size(), before.size());
-/*        before.remove(modificationContact);
+        /* before.remove(modificationContact);
         before.add(contact);
 
         Comparator<? super ContactData> byId = Comparator.comparingInt(ContactData::getId);

@@ -1,7 +1,7 @@
 package ru.stda.pft.addressbook.tests;
 
 
-import org.testng.Assert;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stda.pft.addressbook.model.GroupData;
@@ -31,8 +31,8 @@ public class GroupModificationTests extends TestBase {
                 .withFooter("retest1")
                 .withHeader("retest2");
         app.group().modify(group);
+        assertThat(app.group().count(), Matchers.equalTo(before.size()));
         Groups after = app.group().all();
-        Assert.assertEquals(after.size(), before.size());
 /*        before.remove(modificationGroup);
         before.add(group);
         Assert.assertEquals(before, after);*/
