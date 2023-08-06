@@ -80,12 +80,10 @@ public class ContactHelper extends HelperBase {
 
     }
 
-
-    public void editContactModification() {
-
-        click(By.name("selected[]"));
-        click(By.xpath("//img[@alt='Edit']"));
+    public void editContactModification(String index) {
+       click(By.cssSelector(String.format("a[href='edit.php?id=%s']",index)));
     }
+
 
     public void submitContactModification() {
         click(By.name("update"));
