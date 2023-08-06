@@ -132,10 +132,12 @@ public class ContactHelper extends HelperBase {
         submitContactDelete();
         NavigationHelper.homePage();
     }
+    private Contacs contacCache=null;
 
 
     public Set<ContactData> all() {
-        Contacs contacts = new Contacs();
+        if (contacCache!=null) {return new Contacs(contacCache);}
+        Contacs contacCache = new Contacs();
         List<WebElement> elements = wd.findElements(By.name("entry"));
 //        System.out.println (elements);
         for (WebElement element : elements) {
@@ -144,14 +146,14 @@ public class ContactHelper extends HelperBase {
             String firstname = els.get(2).getText();
             String lastname = els.get(1).getText();
             String address = els.get(3).getText();
-            ContactData contact = new ContactData()
+
+            contacCache.add(new ContactData()
                     .withId(id)
                     .withLastname(lastname)
                     .withFirstname(firstname)
-                    .withAddress(address);
-            contacts.add(contact);
+                    .withAddress(address));
         }
-        return contacts;
+        return contacCache;
     }
     public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<ContactData>();
