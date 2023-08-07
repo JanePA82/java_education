@@ -6,15 +6,15 @@ import com.google.common.collect.ForwardingSet;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Contacs extends ForwardingSet<ContactData> {
+public class Contacts extends ForwardingSet<ContactData> {
     private Set<ContactData> delegate;
 
-    public Contacs(Contacs contacs){
+    public Contacts(Contacts contacs){
         this.delegate = new HashSet<>(contacs.delegate);
     }
 
 
-    public Contacs(){
+    public Contacts(){
         this.delegate= new HashSet<>();
     }
 
@@ -23,14 +23,14 @@ public class Contacs extends ForwardingSet<ContactData> {
         return delegate;
     }
 
-    public Contacs withAdded (ContactData contact){
-        Contacs contacs = new Contacs(this);
+    public Contacts withAdded (ContactData contact){
+        Contacts contacs = new Contacts(this);
         contacs.add(contact);
         return  contacs;
     }
 
-    public Contacs without (ContactData contac){
-        Contacs contacs = new Contacs(this);
+    public Contacts without (ContactData contac){
+        Contacts contacs = new Contacts(this);
         contacs.remove(contac);
         return  contacs;
     }

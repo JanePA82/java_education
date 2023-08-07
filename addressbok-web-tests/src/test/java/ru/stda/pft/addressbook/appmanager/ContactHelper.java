@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import ru.stda.pft.addressbook.model.Contacs;
+import ru.stda.pft.addressbook.model.Contacts;
 import ru.stda.pft.addressbook.model.ContactData;
 
 import java.util.ArrayList;
@@ -136,12 +136,12 @@ public class ContactHelper extends HelperBase {
         submitContactDelete();
         NavigationHelper.homePage();
     }
-    private Contacs contacCache=null;
+    private Contacts contacCache=null;
 
 
     public Set<ContactData> all() {
-        if (contacCache!=null) {return new Contacs(contacCache);}
-        Contacs contacCache = new Contacs();
+        if (contacCache!=null) {return new Contacts(contacCache);}
+        Contacts contacCache = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
 //        System.out.println (elements);
         for (WebElement element : elements) {
@@ -150,12 +150,24 @@ public class ContactHelper extends HelperBase {
             String firstname = els.get(2).getText();
             String lastname = els.get(1).getText();
             String address = els.get(3).getText();
+            String allPhones = els.get(5).getText();
+            String allEmails = els.get(4).getText();
 
             contacCache.add(new ContactData()
                     .withId(id)
                     .withLastname(lastname)
                     .withFirstname(firstname)
-                    .withAddress(address));
+                    .withAddress(address)
+                    .withAllPhones (allPhones)
+                    .withAllEmails (allEmails)
+
+/*                    .withHomePhone(phones [0])
+                    .withMobilePhone(phones [1])
+                    .withWorkPhone(phones [2])
+                    .withEmail(emails[0])
+                    .withEmail2(emails[1])
+                    .withEmail3(emails[2])*/
+            );
         }
         return contacCache;
     }
@@ -177,6 +189,38 @@ public class ContactHelper extends HelperBase {
             contacts.add(contact);
         }
         return contacts;
+    }
+
+    public ContactData infoFromEditForm(ContactData contact) {
+        initContactModificationById(contact.getId());
+        String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+        String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+        String address = wd.findElement(By.name("address")).getAttribute("value");
+        String home = wd.findElement(By.name("home")).getAttribute("value");
+        String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+        String work = wd.findElement(By.name("work")).getAttribute("value");
+        String email = wd.findElement(By.name("email")).getAttribute("value");
+        String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+        String email3 = wd.findElement(By.name("email3")).getAttribute("value");
+        return new ContactData().withId(contact.getId())
+                .withFirstname(firstname)
+                .withLastname(lastname)
+                .withAddress(address)
+                .withHomePhone(home)
+                .withMobilePhone(mobile)
+                .withWorkPhone(work)
+                .withEmail(email)
+                .withEmail2(email2)
+                .withEmail3(email3)
+                ;
+            }
+
+    public void initContactModificationById (int id) {
+/*        WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']",id)));
+        WebElement row = checkbox.findElement(By.xpath("./../../"));
+        List <WebElement> cells = row.findElements(By.tagName("td"));
+        cells.get(7).findElement(By.tagName("a")).click();*/
+        wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
     }
 
    /* public void fillContactFormModify(ContactData contactDataModify) {

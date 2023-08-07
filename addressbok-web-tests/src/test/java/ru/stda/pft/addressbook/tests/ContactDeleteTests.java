@@ -2,7 +2,7 @@ package ru.stda.pft.addressbook.tests;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stda.pft.addressbook.model.Contacs;
+import ru.stda.pft.addressbook.model.Contacts;
 import ru.stda.pft.addressbook.model.ContactData;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -28,11 +28,11 @@ public class ContactDeleteTests extends TestBase {
     }
     @Test
     public void testContactDelete()  {
-        Contacs before = (Contacs) app.contact().all();
+        Contacts before = (Contacts) app.contact().all();
         ContactData deletedContact = before.iterator().next();
         app.contact().delete(deletedContact);
         assertThat(app.contact().count(), equalTo(before.size()-1));
-        Contacs after = (Contacs) app.contact().all();
+        Contacts after = (Contacts) app.contact().all();
         /*        before.remove(deletedContact);
         Assert.assertEquals(before, after);*/
         assertThat(after, equalTo(before.without(deletedContact)));

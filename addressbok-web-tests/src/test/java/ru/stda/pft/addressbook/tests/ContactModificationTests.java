@@ -2,7 +2,7 @@ package ru.stda.pft.addressbook.tests;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stda.pft.addressbook.model.Contacs;
+import ru.stda.pft.addressbook.model.Contacts;
 import ru.stda.pft.addressbook.model.ContactData;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -28,10 +28,8 @@ public class ContactModificationTests extends TestBase {
 
     @Test
     public void testContactModification() {
-        Contacs before = (Contacs) app.contact().all();
+        Contacts before = (Contacts) app.contact().all();
         ContactData modificationContact = before.iterator().next();
-
-//        int index = before.size()-1;
         app.contact().edit(String.valueOf(modificationContact.getId()));
 
         ContactData contact = new ContactData()
@@ -55,7 +53,7 @@ public class ContactModificationTests extends TestBase {
         app.contact().submitChange();
         app.goTo().homePage();
         assertThat(app.contact().count(), equalTo(before.size()));
-        Contacs after = (Contacs) app.contact().all();
+        Contacts after = (Contacts) app.contact().all();
         /* before.remove(modificationContact);
         before.add(contact);
 

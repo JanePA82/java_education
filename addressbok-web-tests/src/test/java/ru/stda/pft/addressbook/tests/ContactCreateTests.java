@@ -3,7 +3,7 @@ package ru.stda.pft.addressbook.tests;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.hamcrest.CoreMatchers;
 import org.testng.annotations.Test;
-import ru.stda.pft.addressbook.model.Contacs;
+import ru.stda.pft.addressbook.model.Contacts;
 import ru.stda.pft.addressbook.model.ContactData;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -13,7 +13,7 @@ public class ContactCreateTests extends  TestBase{
   @Test
   public void testContactCreate() throws Exception {
     app.goTo().homePage();
-    Contacs before = (Contacs) app.contact().all();
+    Contacts before = (Contacts) app.contact().all();
 
     int id = app.contact().nextId();
     app.contact().clickAdd();
@@ -34,7 +34,7 @@ public class ContactCreateTests extends  TestBase{
             .withEmail3("adaf@fds");
         app.contact().create(contact);
     assertThat(app.contact().count(), CoreMatchers.equalTo(before.size()+1));
-    Contacs after = (Contacs) app.contact().all();
+    Contacts after = (Contacts) app.contact().all();
 
 //    before.add(contact);
 
