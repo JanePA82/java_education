@@ -25,6 +25,7 @@ public class ContactHelper extends HelperBase {
 
     public void filling(ContactData contactData) {
         type(By.name("firstname"), contactData.getFirstname());
+        attach(By.name("photo"), contactData.getPhoto());
         type(By.name("middlename"), contactData.getMiddlename());
         type(By.name("lastname"), contactData.getLastname());
         type(By.name("nickname"), contactData.getNickname());
@@ -53,6 +54,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("address2"), contactData.getAddress2());
         type(By.name("phone2"), contactData.getPhone2());
         type(By.name("notes"), contactData.getNotes());
+
 
 
   /*    public void testUntitledTestCase() throws Exception {

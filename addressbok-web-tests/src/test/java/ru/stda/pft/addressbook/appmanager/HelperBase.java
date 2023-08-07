@@ -4,6 +4,8 @@ package ru.stda.pft.addressbook.appmanager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 
+import java.io.File;
+
 public class HelperBase {
     public boolean acceptNextAlert = true;
     protected static WebDriver wd;
@@ -24,11 +26,17 @@ public class HelperBase {
                 wd.findElement(locator).clear();
                 wd.findElement(locator).sendKeys(text);
             }
-        }
+        }}
+
+        protected void attach(By locator, File file) {
+            if (file != null) {
+              wd.findElement(locator).sendKeys(file.getAbsolutePath());
+                }
+            }
 /*    protected void list_check (By locator) {
         new Select(wd.findElement(locator)).getFirstSelectedOption();
     }*/
-    }
+
 
     protected void chois(By locator, String text) {
         if (text!=null){
