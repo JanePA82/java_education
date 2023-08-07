@@ -1,37 +1,38 @@
 package ru.stda.pft.addressbook.tests;
 
-import org.apache.commons.lang3.RandomStringUtils;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stda.pft.addressbook.model.GroupData;
 import ru.stda.pft.addressbook.model.Groups;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.testng.Assert.assertEquals;
 
 public class GroupCreationTests extends TestBase {
+    @DataProvider
+    public Iterator<Object[]> validGroups() {
+        List<Object[]> list = new ArrayList<Object[]>();
+        list.add(new Object[]{new GroupData().withName("test 1").withHeader("header 1").withFooter("footer 1") });
+        list.add(new Object[]{new GroupData().withName("test 2").withHeader("header 2").withFooter("footer 2") });
+        list.add(new Object[]{new GroupData().withName("test 3").withHeader("header 3").withFooter("footer 3") });
+        return list.iterator();
+    }
 
-    @Test
-    public void testGroupCreation() throws Exception {
+    @Test(dataProvider = "validGroups")
+    public void testGroupCreation(GroupData group) throws Exception {
         app.goTo().groupPage();
         Groups before = app.group().all();
-   //     int id = app.group().getIndexGroup();
-        String nameGR = RandomStringUtils.randomAlphabetic(5);
-        GroupData group = new GroupData().withName(nameGR);//.withId(id);
         app.group().create(group);
-        assertThat(app.group().count(), equalTo(before.size()+1));
-
+        assertThat(app.group().count(), equalTo(before.size() + 1));
         Groups after = app.group().all();
         assertEquals(after.size(), before.size() + 1);
-
-//        group.withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt());
-//        before.add(group);
-/*        Comparator<? super GroupData> byId= Comparator.comparingInt(GroupData::getId);
-        before.sort(byId);
-        after.sort(byId);
-        Assert.assertEquals(before, after);*/
-        assertThat(after, equalTo(before.withAdded(group.withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt()))));
-   }
+        assertThat(after, equalTo(before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+    }
 
 
     @Test
