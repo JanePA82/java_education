@@ -49,7 +49,7 @@ public class ContactData {
     private String notes;
     private String allPhones;
     private String allEmails;
-    @Expose
+//    @Expose
     private File photo;
 
 

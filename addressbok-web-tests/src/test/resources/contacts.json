@@ -8,8 +8,7 @@
     "workPhone": "WorkPhone 0",
     "email": "Email 0",
     "email2": "Email2 0",
-    "email3": "Email3 0",
-    "photo": {}
+    "email3": "Email3 0"
   },
   {
     "firstname": "Firstname 1",
@@ -20,8 +19,7 @@
     "workPhone": "WorkPhone 1",
     "email": "Email 1",
     "email2": "Email2 1",
-    "email3": "Email3 1",
-    "photo": {}
+    "email3": "Email3 1"
   },
   {
     "firstname": "Firstname 2",
@@ -32,7 +30,6 @@
     "workPhone": "WorkPhone 2",
     "email": "Email 2",
     "email2": "Email2 2",
-    "email3": "Email3 2",
-    "photo": {}
+    "email3": "Email3 2"
   }
 ]

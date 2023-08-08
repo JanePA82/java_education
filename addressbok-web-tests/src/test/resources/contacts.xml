@@ -9,7 +9,6 @@
     <email>Email 0</email>
     <email2>Email2 0</email2>
     <email3>Email3 0</email3>
-    <photo>Photo 0</photo>
   </group>
   <group>
     <firstname>Firstname 1</firstname>
@@ -21,7 +20,6 @@
     <email>Email 1</email>
     <email2>Email2 1</email2>
     <email3>Email3 1</email3>
-    <photo>Photo 1</photo>
   </group>
   <group>
     <firstname>Firstname 2</firstname>
@@ -33,6 +31,5 @@
     <email>Email 2</email>
     <email2>Email2 2</email2>
     <email3>Email3 2</email3>
-    <photo>Photo 2</photo>
   </group>
 </list>
