@@ -7,8 +7,8 @@ import java.util.Objects;
 
 @XStreamAlias("group")
 public class GroupData {
-    @XStreamOmitField
 
+    @XStreamOmitField
     private int id;
     private String name;
     private String header;
