@@ -10,6 +10,7 @@ dependencies {
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
     testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.2-rc1'
     implementation group: 'com.beust', name: 'jcommander', version: '1.48'
+    implementation group: 'com.thoughtworks.xstream', name: 'xstream', version: '1.4.20'
 
 }
 test {

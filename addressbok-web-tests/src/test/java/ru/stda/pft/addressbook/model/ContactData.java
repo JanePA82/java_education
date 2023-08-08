@@ -1,13 +1,18 @@
 package ru.stda.pft.addressbook.model;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import java.io.File;
 import java.util.Objects;
 
+@XStreamAlias("group")
 public class ContactData {
+    @XStreamOmitField
     private int id;
-    private  String firstname;
+    private String firstname;
     private String middlename;
-    private  String lastname;
+    private String lastname;
     private String nickname;
     private String title;
     private String company;
@@ -33,7 +38,6 @@ public class ContactData {
     private String allPhones;
     private String allEmails;
     private File photo;
-
 
 
     @Override
@@ -178,7 +182,9 @@ public class ContactData {
         return homepage;
     }
 
-    public String getBday() { return bday;    }
+    public String getBday() {
+        return bday;
+    }
 
     public String getBmonth() {
         return bmonth;
@@ -216,10 +222,17 @@ public class ContactData {
         return notes;
     }
 
-    public int getId() { return id;}
+    public int getId() {
+        return id;
+    }
 
-    public String getAllPhones()  { return allPhones;}
-    public String getAllEmails()  { return allEmails;}
+    public String getAllPhones() {
+        return allPhones;
+    }
+
+    public String getAllEmails() {
+        return allEmails;
+    }
 
 
     public ContactData withId(int id) {
@@ -383,13 +396,15 @@ public class ContactData {
 
     }
 
-    public ContactData withAllPhones(String allPhones)  {
+    public ContactData withAllPhones(String allPhones) {
         this.allPhones = allPhones;
-        return this;}
-    public ContactData withAllEmails(String allEmails)  {
-        this.allEmails = allEmails;
-        return this ;}
+        return this;
+    }
 
+    public ContactData withAllEmails(String allEmails) {
+        this.allEmails = allEmails;
+        return this;
+    }
 
 
 }

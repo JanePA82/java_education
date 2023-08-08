@@ -1,28 +1,34 @@
 package ru.stda.pft.addressbook.model;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import java.util.Objects;
 
+@XStreamAlias("group")
 public class GroupData {
-    private  int id ;
-    private  String name;
-    private  String header;
-    private  String footer;
+    @XStreamOmitField
+
+    private int id;
+    private String name;
+    private String header;
+    private String footer;
 
 
-  /*  public GroupData(int id, String name, String header, String footer) {
-        this.id = id;
-        this.name = name;
-        this.header = header;
-        this.footer = footer;
-    }
+    /*  public GroupData(int id, String name, String header, String footer) {
+          this.id = id;
+          this.name = name;
+          this.header = header;
+          this.footer = footer;
+      }
 
-    public GroupData(String name, String header, String footer) {
-//        this.id = Integer.parseInt(null);
-        this.name = name;
-        this.header = header;
-        this.footer = footer;
-    }
-*/
+      public GroupData(String name, String header, String footer) {
+  //        this.id = Integer.parseInt(null);
+          this.name = name;
+          this.header = header;
+          this.footer = footer;
+      }
+  */
     public String getName() {
         return name;
     }
@@ -82,6 +88,7 @@ public class GroupData {
     }
 
     public void setId(int max) {
-    }}
+    }
+}
 
 
