@@ -59,7 +59,7 @@ public class ContactCreateTests extends TestBase {
     }
 
     @Test(dataProvider = "validGroupsJSON")
-    public void testContactCreate(ContactData contact) throws Exception {
+    public void testContactCreate(ContactData contact) {
         app.goTo().homePage();
         Contacts before = (Contacts) app.contact().all();
         int id = app.contact().nextId();
