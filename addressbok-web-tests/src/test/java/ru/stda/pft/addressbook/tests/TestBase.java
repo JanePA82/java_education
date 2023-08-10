@@ -5,11 +5,12 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import ru.stda.pft.addressbook.appmanager.ApplicationManager;
 
-import static org.openqa.selenium.remote.Browser.CHROME;
+import static java.lang.System.getProperty;
 
 public class TestBase {
 
-    protected static final  ApplicationManager app = new ApplicationManager(CHROME.browserName());
+    protected static final  ApplicationManager app =
+            new ApplicationManager(getProperty("browser"/*, Browser.FIREFOX.browserName()*/));
 
     @BeforeSuite(alwaysRun = true)
     public void setUp() throws Exception {
@@ -24,8 +25,4 @@ public class TestBase {
     public ApplicationManager getApp() {
         return app;
     }
-
-
-
-
 }
